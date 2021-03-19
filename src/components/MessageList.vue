@@ -1,6 +1,6 @@
 <template>
   <div>
-      <span v-for="message in messages" :key="message">
+      <span v-for="message in messages" :key="message.timestamp">
       <Message :msg=message />
       </span>
   </div>
@@ -8,6 +8,7 @@
 
 <script>
 import Message from '@/components/Message.vue'
+
 export default {
   name: 'MessageList',
   components: {

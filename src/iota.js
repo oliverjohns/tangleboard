@@ -4,11 +4,20 @@ export default {
         .then(transactions => {
             for (let i = 0; i < transactions.length; i++) {
                 let transaction = transactions[i]
+                
                 this.$IOTA.getBundle(transaction.hash)
                 .then(bundle => {
                     let msg = this.$Extract.extractJson(bundle)
-                    if(messages.indexOf(msg) < 0){
-                        messages.push(msg)
+
+                    // INEFFICIENT CODE WAY OF GETTING TIMESTAMP
+                    let msg2 = JSON.parse(msg)
+                    msg2['timestamp'] = transaction.attachmentTimestamp
+                    let msg3 = JSON.stringify(msg2)
+                    //////////////////////
+
+
+                    if(messages.indexOf(msg3) < 0){
+                        messages.push(msg3)
                     }
                     return null
                     

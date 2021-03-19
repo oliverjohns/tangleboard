@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p>{{msg}}</p>
+      <p>{{JSON.parse(msg).message}} | {{JSON.parse(msg).timestamp}}</p>
   </div>
 </template>
 

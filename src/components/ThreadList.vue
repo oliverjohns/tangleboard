@@ -30,7 +30,7 @@ export default {
     },
     startAutoFetchingThreads: function() {
       this.fetchThreads()
-      if (this.$refreshtime > 0) {
+      if (globalSettings.refreshTime > 0) {
         this.intervalid1 = setInterval(function(){
             this.fetchThreads()
         }.bind(this), globalSettings.refreshTime*1000);

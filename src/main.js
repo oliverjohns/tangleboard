@@ -13,11 +13,9 @@ Vue.prototype.$Extract = require('@iota/extract-json')
 Vue.prototype.$Converter = require('@iota/converter');
 Vue.prototype.$MD5 = require('md5');
 
-Vue.prototype.$refreshtime = 4;
-
 export const globalSettings = new Vue({
   data: {
-    refreshTime: 10
+    refreshTime: 4
   }
 })
 

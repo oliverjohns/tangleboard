@@ -35,7 +35,7 @@ export default {
     startAutoFetchingMessages: function() {
       this.fetchMessagesforThread()
       console.log("refresh time is: " + globalSettings.refreshTime * 1000)   
-      if (this.$refreshtime > 0) {
+      if (globalSettings.refreshTime > 0) {
         this.intervalid1 = setInterval(function(){
             this.fetchMessagesforThread()
         }.bind(this), globalSettings.refreshTime*1000);

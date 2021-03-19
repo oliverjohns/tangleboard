@@ -12,6 +12,7 @@
     "@iota/core": "^1.0.0-beta.30",
     "@iota/extract-json": "^1.0.0-beta.30",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1"
