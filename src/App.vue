@@ -1,14 +1,5 @@
 <template>
   <div id="app">
-    <div>
-      <p>Refresh interval</p>
-      <select v-model="$refreshtime" name="refreshtime" id="refreshtime" value=3>
-        <option value=0>Off</option>
-        <option value=30>30s</option>
-        <option value=10>10s</option>
-        <option value=3>3s</option>
-      </select>
-    </div>
     <div id="nav">
       <router-link to="/">Home</router-link>
     </div>

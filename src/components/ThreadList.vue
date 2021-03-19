@@ -12,6 +12,7 @@
 
 <script>
 import iota from '../iota.js'
+import {globalSettings} from '../main.js'
 export default {
   created: function () {
     this.fetchMessages = iota.fetchMessages
@@ -19,16 +20,34 @@ export default {
   name: 'ThreadList',
   data: function () {
     return {
-      threads: []
+      threads: [],
+      intervalid1: null
+    }
+  },
+  methods: {
+    fetchThreads: function() {
+      this.fetchMessages(this.$boardAddress, this.threads)
+    },
+    startAutoFetchingThreads: function() {
+      this.fetchThreads()
+      if (this.$refreshtime > 0) {
+        this.intervalid1 = setInterval(function(){
+            this.fetchThreads()
+        }.bind(this), globalSettings.refreshTime*1000);
+      }    
+    },
+    stopAutoFetchingThreads: function() {
+      clearInterval(this.intervalid1)
     }
   },
   props: {
     msg: String
   },
   mounted: function() {
-    
-    this.fetchMessages(this.$boardAddress, this.threads)
-    console.log(this.threads)
+    this.startAutoFetchingThreads()
+  },
+  beforeDestroy: function() {
+    this.stopAutoFetchingThreads()
   }
 }
 </script>
