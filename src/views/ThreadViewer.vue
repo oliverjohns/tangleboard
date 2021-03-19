@@ -22,7 +22,8 @@ export default {
   data: function () {
     return {
       messages: [],
-      threadAdress: null
+      threadAdress: null,
+      intervalid1: null
     }
   },
   methods: {
@@ -41,6 +42,7 @@ export default {
   beforeMount() {
     this.threadAdress = this.generateAddressFromName(this.$route.params.name)
     console.log(this.threadAdress)
+    this.fetchMessagesforThread()
     this.startAutoFetchingMessages()
   }
 }

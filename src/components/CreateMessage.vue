@@ -27,7 +27,9 @@ export default {
       console.log("threadNames")
       console.log(this.threadName)
       let threadAddress = this.generateAddressFromName(this.threadName)
-      this.postMessage({"message": this.messageInput}, threadAddress)
+      let msg = this.messageInput
+      this.postMessage({"message": msg}, threadAddress)
+      this.messageInput = ""
     }
   }
 }

@@ -13,6 +13,8 @@ Vue.prototype.$Extract = require('@iota/extract-json')
 Vue.prototype.$Converter = require('@iota/converter');
 Vue.prototype.$MD5 = require('md5');
 
+Vue.prototype.$refreshtime = 3
+
 new Vue({
   router,
   render: h => h(App)

@@ -1,26 +1,29 @@
 export default {
     fetchMessages: function (address, messages){
-        this.$IOTA.findTransactionObjects({ addresses: [address] })
+        return this.$IOTA.findTransactionObjects({ addresses: [address] })
         .then(transactions => {
             for (let i = 0; i < transactions.length; i++) {
                 let transaction = transactions[i]
                 this.$IOTA.getBundle(transaction.hash)
-                .then(bundle =>{
+                .then(bundle => {
                     let msg = this.$Extract.extractJson(bundle)
                     if(messages.indexOf(msg) < 0){
                         messages.push(msg)
                     }
+                    return null
                     
                 })
                 .catch(err => {
                     console.error(err);
+                    return null
                 });
-              } 
+              }
+              return null;
     
         })
         .catch(err => {
             console.log(err)
-            return messages;
+            return null;
             // ...
         })
         

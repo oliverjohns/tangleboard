@@ -4,7 +4,7 @@
     
     <h3>Threads</h3>
     <ul>
-      <li v-for="thread in threads" :key="thread"><router-link :to="{ name: 'threadviewer', params: { name: thread['name'] }}">{{thread['name']}}</router-link></li>
+      <li v-for="thread in threads" :key="thread.name"><router-link :to="{ name: 'threadviewer', params: { name: JSON.parse(thread)['name'] }}">{{JSON.parse(thread)['name']}}</router-link></li>
     </ul>
 
   </div>
@@ -19,7 +19,7 @@ export default {
   name: 'ThreadList',
   data: function () {
     return {
-      threads: [{"name": "thread 1"}]
+      threads: []
     }
   },
   props: {
