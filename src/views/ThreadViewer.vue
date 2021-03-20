@@ -2,7 +2,7 @@
   <div class="about">
     <h1>{{this.$route.params.name}}</h1>
     <MessageList :messages=messages />
-    <CreateMessage :threadName=$route.params.name />
+    <CreateMessage :threadName=$route.params.name :threadTimestamp=$route.params.timestamp />
   </div>
 </template>
 <script>
@@ -47,10 +47,11 @@ export default {
 
   },
   props: {
-    name: String
+    name: String,
+    timestamp: Number
   },
   beforeMount: function() {
-    this.threadAdress = this.generateAddressFromName(this.$route.params.name)
+    this.threadAdress = this.generateAddressFromName(this.$route.params.name, this.$route.params.timestamp)
     this.startAutoFetchingMessages()
   },
   mounted: function() {

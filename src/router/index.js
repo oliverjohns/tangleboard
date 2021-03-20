@@ -11,7 +11,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/threadviewer/:name',
+    path: '/threadviewer/:name/:timestamp',
     name: 'threadviewer',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

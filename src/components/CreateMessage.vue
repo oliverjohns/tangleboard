@@ -20,13 +20,14 @@ export default {
     }
   },
   props: {
-      threadName: String
+      threadName: String,
+      threadTimestamp: Number
   },
   methods: {
     postMessageButton: function () {
       console.log("threadNames")
       console.log(this.threadName)
-      let threadAddress = this.generateAddressFromName(this.threadName)
+      let threadAddress = this.generateAddressFromName(this.threadName, this.threadTimestamp)
       let msg = this.messageInput
       this.postMessage({"message": msg}, threadAddress)
       this.messageInput = ""

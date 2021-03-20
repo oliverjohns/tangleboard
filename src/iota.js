@@ -8,10 +8,10 @@ export default {
                 this.$IOTA.getBundle(transaction.hash)
                 .then(bundle => {
                     let msg = this.$Extract.extractJson(bundle)
-
+                    console.log(transaction)
                     // INEFFICIENT CODE WAY OF GETTING TIMESTAMP
                     let msg2 = JSON.parse(msg)
-                    msg2['timestamp'] = transaction.attachmentTimestamp
+                    msg2['timestamp'] = transaction.timestamp
                     let msg3 = JSON.stringify(msg2)
                     //////////////////////
 
@@ -67,7 +67,7 @@ export default {
         });
   
       },
-    generateAddressFromName: function (name) {
-        return this.$boardName + this.$Converter.asciiToTrytes(this.$MD5(name))
+    generateAddressFromName: function (name, timestamp) {
+        return this.$boardName + this.$Converter.asciiToTrytes(this.$MD5(name+timestamp))
     }
   }

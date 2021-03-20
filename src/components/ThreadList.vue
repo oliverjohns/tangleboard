@@ -4,7 +4,7 @@
     
     <h3>Threads</h3>
     <ul>
-      <li v-for="thread in threads" :key="thread.name"><router-link :to="{ name: 'threadviewer', params: { name: JSON.parse(thread)['name'] }}">{{JSON.parse(thread)['name']}}</router-link></li>
+      <li v-for="thread in threads" :key="thread.name"><router-link :to="{ name: 'threadviewer', params: { name: JSON.parse(thread)['name'], timestamp: JSON.parse(thread)['timestamp'] }}">{{JSON.parse(thread)['name']}}</router-link></li>
     </ul>
 
   </div>
