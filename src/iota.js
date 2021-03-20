@@ -35,7 +35,6 @@ export default {
                     if(messages.findIndex((element) => element['hash'] == bundle[0].hash) < 0){
                         msg2['timestamp'] = transaction.timestamp
                         msg2['hash'] = bundle[0].hash
-                        console.log(messages)
                         sortedTimestampInsert(messages, msg2)
                     }
                     return null
