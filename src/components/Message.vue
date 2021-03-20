@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p>{{msg.message}} | {{msg.timestamp}}</p>
+      <p>{{msg.message}} | {{msg.timestamp}} | {{msg.hash}}</p>
   </div>
 </template>
 

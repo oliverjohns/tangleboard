@@ -1,4 +1,23 @@
+var sortedTimestampInsert = function (arr, e) {
+    if (arr.length == 0) {
+        arr.push(e);
+      return e;
+    }
+    let i = arr.length - 1;
+    while (i >= 0) {
+        if (arr[i]['timestamp'] < e['timestamp']) {
+            arr.splice(i+1, 0, e);
+        return arr
+      }
+      i--
+    }
+    arr.splice(0, 0, e);
+    return arr
+  }
 export default {
+
+
+
     fetchMessages: function (address, messages){
         return this.$IOTA.findTransactionObjects({ addresses: [address] })
         .then(transactions => {
@@ -15,7 +34,9 @@ export default {
                         msg2['timestamp'] = transaction.timestamp
                         msg2['hash'] = bundle[0].hash
                         //let msg3 = JSON.stringify(msg2)
-                        messages.push(msg2)
+                        console.log(messages)
+                        sortedTimestampInsert(messages, msg2)
+                        console.log(messages)
                         console.log("MISS")
                     } else {
                         console.log("HIT")
