@@ -1,6 +1,6 @@
 <template>
   <div>
-      <p>{{JSON.parse(msg).message}} | {{JSON.parse(msg).timestamp}}</p>
+      <p>{{msg.message}} | {{msg.timestamp}}</p>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
     }
   },
   props: {
-    msg: String
+    msg: Object
   }
 }
 </script>

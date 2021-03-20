@@ -8,16 +8,17 @@ export default {
                 this.$IOTA.getBundle(transaction.hash)
                 .then(bundle => {
                     let msg = this.$Extract.extractJson(bundle)
-                    console.log(transaction)
-                    // INEFFICIENT CODE WAY OF GETTING TIMESTAMP
                     let msg2 = JSON.parse(msg)
-                    msg2['timestamp'] = transaction.timestamp
-                    let msg3 = JSON.stringify(msg2)
-                    //////////////////////
+                    
 
-
-                    if(messages.indexOf(msg3) < 0){
-                        messages.push(msg3)
+                    if(messages.findIndex((element) => element['hash'] == bundle[0].hash) < 0){
+                        msg2['timestamp'] = transaction.timestamp
+                        msg2['hash'] = bundle[0].hash
+                        //let msg3 = JSON.stringify(msg2)
+                        messages.push(msg2)
+                        console.log("MISS")
+                    } else {
+                        console.log("HIT")
                     }
                     return null
                     
