@@ -1,8 +1,15 @@
 <template>
   <div class="createmessage">
     <h3>Write new message</h3>
-    <textarea v-model="messageInput" type="text"></textarea>
-    <button v-on:click="postMessageButton()">Post</button>
+    <textarea
+      class="createmessagebox"
+      v-model="messageInput" 
+      type="text"
+      @keydown.enter.exact.prevent
+      @keyup.enter.exact="postMessageButton"
+      @keydown.enter.shift.exact="newline">
+    </textarea>
+    <!-- button v-on:click="postMessageButton()">Post</button -->
   </div>
 </template>
 
@@ -24,6 +31,9 @@ export default {
       threadTimestamp: Number
   },
   methods: {
+    newline: function() {
+      this.messageInput = `${this.messageInput}\n`;
+    },
     postMessageButton: function () {
       console.log("threadNames")
       console.log(this.threadName)
@@ -54,5 +64,8 @@ a {
 }
 .createmessage {
   padding-bottom: 50px;
+}
+.createmessagebox {
+  width:600px;
 }
 </style>
