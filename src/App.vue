@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+      <img class="globe" src=".\assets\globe2.gif">
       <h1 class="title">TangleBoard</h1>
       <router-link to="/">Home</router-link>
     </div>
@@ -15,7 +16,7 @@
 <style>
 @font-face {
   font-family: "Mexcellent";
-  src: local("Mexcellent"),   url(./assets/fonts/mexcellent.regular.otf) format("opentype");}
+  src: local("Mexcellent"),   url(./assets/fonts/mexcellent.3d.otf) format("opentype");}
   @font-face {
   font-family: "Oswald";
   src: local("Oswald"),   url(./assets/fonts/oswald.light.ttf) format("truetype");}

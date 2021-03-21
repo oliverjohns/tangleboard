@@ -77,7 +77,6 @@ a {
 }
 .threadlist {
   background: rgb(238,238,238);
-  background: radial-gradient(circle, rgba(238,238,238,1) 0%, rgba(238,238,238,1) 67%, rgba(254,254,254,0) 100%);
   padding: 10px 50px;
   display:table;
   margin: 30px auto;

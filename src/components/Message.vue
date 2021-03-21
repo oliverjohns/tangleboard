@@ -15,6 +15,7 @@
 }
 .messagetext {
   text-align:left;
+  overflow-wrap: break-word;
   
 }
 .timestamp {
