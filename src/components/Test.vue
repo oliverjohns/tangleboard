@@ -24,8 +24,11 @@ var streamTag= ""
 import iota from '../iota.js'
 export default {
   created: function () {
+    this.sessionkey  = Math.random().toString(36)
     this.postMessage = iota.postMessage,
-    this.fetchMessage = iota.fetchMessageWithTag
+    this.candidateSent = false
+    this.answerRec = false
+    this.fetchMessagesWithTags = iota.fetchMessagesWithTags
     this.generateTag = iota.generateTag
   },
   name: 'Test',
@@ -38,6 +41,25 @@ export default {
     msg: String
   },
   methods: {
+     ProcessAnswer: function (signal) {
+      //console.log(signal)
+      if (signal.key != this.sessionkey && signal.Data.type=="answer"){
+        console.log("process ", signal)
+        peer1.signal(signal.Data)
+        this.answerRec = true
+      }
+    },
+    ProcessCandidate: function (signal) {
+    if (!this.answerRec){
+      setTimeout(() => { this.ProcessCandidate(signal); }, 2000);
+      return
+    }
+    //console.log(signal)
+      if (signal.key != this.sessionkey && signal.Data.type=="candidate"){
+        console.log("process ", signal)
+        peer1.signal(signal.Data)
+      }
+    },
     CreateStream: function () {
      streamTag = this.tag
      navigator.mediaDevices.getUserMedia({
@@ -47,7 +69,9 @@ export default {
 
     },
     Connect: function () {
-      console.log(streamTag)
+      this.fetchMessagesWithTags(this.$chatAddress, this.ProcessAnswer, [this.generateTag(streamTag)])
+      this.fetchMessagesWithTags(this.$chatAddress, this.ProcessCandidate, [this.generateTag(streamTag)])
+
     },
     gotMedia: function (Vstream) {
     var video = document.getElementById('Video')
@@ -67,9 +91,18 @@ export default {
 
 
       peer1.on('signal', data => {
-        this.postMessage(data, this.$chatAddress, this.generateTag(streamTag))
-        // when peer1 has signaling data, give it to peer2 somehow
-        console.log("Sent to ",this.$chatAddress)
+        if (data.type == "offer"){
+          let signalData = {Data:data, key:this.sessionkey}
+          this.postMessage(signalData, this.$chatAddress, this.generateTag(streamTag))
+          // when peer1 has signaling data, give it to peer2 somehow
+          console.log("Sent to ",this.$chatAddress)
+        }
+         else if (data.type == "candidate"){
+          let signalData = {Data:data, key:this.sessionkey}
+          this.postMessage(signalData, this.$chatAddress, this.generateTag(streamTag))
+          this.candidateSent=true
+        }
+        
       
       })
       peer1.on('error', err => console.log('error', err))

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="createmessage">
     <h3>Write new message</h3>
-    <input v-model="messageInput" type="text">
+    <textarea v-model="messageInput" type="text"></textarea>
     <button v-on:click="postMessageButton()">Post</button>
   </div>
 </template>
@@ -50,6 +50,9 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #77006d;
+}
+.createmessage {
+  padding-bottom: 50px;
 }
 </style>

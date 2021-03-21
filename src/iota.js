@@ -1,4 +1,5 @@
 var sortedTimestampInsert = function (arr, e) {
+    
     if (arr.length == 0) {
         arr.push(e);
       return e;
@@ -28,18 +29,13 @@ export default {
                 .then(bundle => {
                     let msg = this.$Extract.extractJson(bundle)
                     let msg2 = JSON.parse(msg)
-                    
-
+                    if (!msg2['message'] && !msg2['name']) {
+                        return null
+                    }
                     if(messages.findIndex((element) => element['hash'] == bundle[0].hash) < 0){
                         msg2['timestamp'] = transaction.timestamp
                         msg2['hash'] = bundle[0].hash
-                        //let msg3 = JSON.stringify(msg2)
-                        console.log(messages)
                         sortedTimestampInsert(messages, msg2)
-                        console.log(messages)
-                        console.log("MISS")
-                    } else {
-                        console.log("HIT")
                     }
                     return null
                     
@@ -59,7 +55,7 @@ export default {
         })
     },
     
-        fetchMessagesWithTags: function (address, messages, tags){
+        fetchMessagesWithTags: function (address, callbck, tags){
             return this.$IOTA.findTransactionObjects({ addresses: [address], tags:tags })
             .then(transactions => {
                 for (let i = 0; i < transactions.length; i++) {
@@ -69,8 +65,7 @@ export default {
                     .then(bundle => {
                         let msg = this.$Extract.extractJson(bundle)
                         let msg2 = JSON.parse(msg)
-                        
-                        messages.push(msg2);
+                        callbck(msg2)
                         return null
                         
                     })

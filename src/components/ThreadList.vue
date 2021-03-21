@@ -1,12 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    
-    <h3>Threads</h3>
-    <ul>
-      <li v-for="thread in threads" :key="thread.hash"><router-link :to="{ name: 'threadviewer', params: { name: thread['name'], timestamp: thread['timestamp'] }}">{{thread['name']}}</router-link></li>
-    </ul>
+  <div class="threadlist">
+    <h1 class="oswald">{{ msg }}</h1>
 
+ <table class="threads">
+  <tr v-for="thread in threads" :key="thread.hash">
+    <th><router-link :to="{ name: 'threadviewer', params: { name: thread['name'], timestamp: thread['timestamp'] }}">{{thread['name']}}</router-link></th>
+    <th>{{new Date(thread['timestamp']*1000).toLocaleString()}}</th>
+  </tr>
+</table> 
   </div>
 </template>
 
@@ -66,6 +67,23 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #77006d;
+}
+.threads {
+  width: 100%;
+}
+.threads th {
+  text-align: left;
+}
+.threadlist {
+  background: rgb(238,238,238);
+  padding: 20px 50px;
+  display:table;
+  margin: 30px auto;
+}
+.oswald {
+      font-family: "Oswald", Helvetica, Arial;
+    font-size: 70px;
+    margin-top: 0px;
 }
 </style>

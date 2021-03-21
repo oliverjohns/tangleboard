@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="createthread">
+    <h1 class="oswald">{{ msg }}</h1>
     
     <input v-model="threadNameInput" type="text">
     <button v-on:click="createThread()">Create</button>
@@ -8,7 +8,14 @@
 
   </div>
 </template>
-
+<style>
+.createthread {
+  background: rgb(238,238,238);
+  padding: 30px 50px;
+  margin: 10px auto;
+  display: table;
+}
+</style>
 <script>
 import iota from '../iota.js'
 export default {
@@ -48,6 +55,11 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #77006d;
+}
+.oswald {
+      font-family: "Oswald", Helvetica, Arial;
+    font-size: 70px;
+    margin-top: 0px;
 }
 </style>

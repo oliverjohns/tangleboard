@@ -13,12 +13,16 @@
 </template>
 
 <script>
-//var wrtc = require('wrtc')
-//ar Peer = require('simple-peer')
-//var peer2;
+var wrtc = require('wrtc')
+var Peer = require('simple-peer')
+var peer2;
+var streamTag= ""
 import iota from '../iota.js'
 export default {
   created: function () {
+    this.sessionkey  = Math.random().toString(36)
+    this.candidateSent = false
+    this.offerRec = false
     this.postMessage = iota.postMessage
     this.generateTag = iota.generateTag
     this.fetchMessagesWithTags = iota.fetchMessagesWithTags
@@ -33,24 +37,45 @@ export default {
     msg: String
   },
   methods: {
+    ProcessOffer: function (signal) {
+      //console.log(signal)
+      if (signal.key != this.sessionkey && signal.Data.type=="offer"){
+        console.log("process ", signal)
+        peer2.signal(signal.Data)
+        this.offerRec = true
+      }
+    },
+    ProcessCandidate: function (signal) {
+    if (!this.offerRec){
+      setTimeout(() => { this.ProcessCandidate(signal); }, 5000);
+      return
+    }
+    if (signal.key != this.sessionkey && signal.Data.type=="candidate"){
+      console.log("process ", signal)
+      peer2.signal(signal.Data)
+    }
+  },
     Connect: function () {
-      console.log("walls")
-
-      
-      const tag = this.tag;
-      var signals = []
-      this.fetchMessagesWithTags(this.$chatAddress,signals, [this.generateTag(tag)])
-      console.log("coola killen",signals.length)
-      signals.forEach(signal => {
-        console.log(signal)
-      })
-
-      /*peer2 = new Peer({  wrtc: wrtc , iceServers: [{
+      peer2 = new Peer({  wrtc: wrtc , iceServers: [{
       urls: "stun:stun.stunprotocol.org"}]})
-      peer2.signal(data)
+      
+      streamTag = this.tag;
+      this.fetchMessagesWithTags(this.$chatAddress, this.ProcessOffer, [this.generateTag(streamTag)])
+      this.fetchMessagesWithTags(this.$chatAddress, this.ProcessCandidate, [this.generateTag(streamTag)])
+   
+
+    
       peer2.on('signal', data => {
-  // when peer1 has signaling data, give it to peer2 somehow
-      console.log("we here",  JSON.stringify(data))
+        if (data.type == "answer"){
+          let signalData = {Data:data, key:this.sessionkey}
+          this.postMessage(signalData, this.$chatAddress, this.generateTag(streamTag))
+        }
+        else if (data.type == "candidate" && !this.candidateSent){
+          this.candidateSent=true
+          let signalData = {Data:data, key:this.sessionkey}
+          this.postMessage(signalData, this.$chatAddress, this.generateTag(streamTag))
+          
+        }
     
       })
       peer2.on('error', err => console.log('error', err))
@@ -70,11 +95,6 @@ export default {
           video.play()
         })
 
-      peer2.on('data', data => {      
-        // got a data channel message
-        console.log('got a message from peer1: ' + data)
-      })
-    
 
         //this.postMessage({"name": threadName}, this.$boardAddress)
         //this.$router.push({ name: 'threadviewer', params: { name: threadName } })*/

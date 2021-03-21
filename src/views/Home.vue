@@ -7,10 +7,11 @@
         <option value=30>30s</option>
         <option value=10>10s</option>
         <option value=4>4s</option>
+        <option value=2>2s</option>
       </select>
     </div>
-    <CreateThread msg="Create a new thread"/>
     <ThreadList msg="ThreadList"/>
+    <CreateThread msg="Create a new thread"/>
   </div>
 </template>
 

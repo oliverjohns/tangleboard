@@ -1,7 +1,7 @@
 <template>
   <div>
-      <span v-for="message in messages" :key="message.timestamp">
-      <Message :msg=message />
+      <span v-for="message in messages" :key="message.hash">
+        <Message :hoverTarget=hoverTarget :threadName=$route.params.name :threadTimestamp=$route.params.timestamp :msg=message />
       </span>
   </div>
 </template>
@@ -16,10 +16,21 @@ export default {
   },
   data: function () {
     return {
+      hoverTarget: null
+    }
+  },
+  methods: {
+    hoverOn: function(target) {
+      this.hoverTarget = target
+    },
+    hoverOff: function() {
+      this.hoverTarget = null
     }
   },
   props: {
-    messages: Array
+    messages: Array,
+    threadName: String,
+    threadTimestamp: Number
   }
 }
 </script>
@@ -38,6 +49,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #77006d;
 }
 </style>
