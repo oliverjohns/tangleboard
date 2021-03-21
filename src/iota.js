@@ -1,4 +1,4 @@
-var sortedTimestampInsert = function (arr, e) {
+var sortedTimestampInsert = function (arr, e, reverse) {
     
     if (arr.length == 0) {
         arr.push(e);
@@ -6,10 +6,18 @@ var sortedTimestampInsert = function (arr, e) {
     }
     let i = arr.length - 1;
     while (i >= 0) {
-        if (arr[i]['timestamp'] < e['timestamp']) {
-            arr.splice(i+1, 0, e);
-        return arr
-      }
+        if (reverse) {
+            if (arr[i]['timestamp'] > e['timestamp']) {
+                arr.splice(i+1, 0, e);
+                return arr
+            }
+        } else {
+            if (arr[i]['timestamp'] < e['timestamp']) {
+                arr.splice(i+1, 0, e);
+                return arr
+            }
+        }
+        
       i--
     }
     arr.splice(0, 0, e);
@@ -19,7 +27,7 @@ export default {
 
 
 
-    fetchMessages: function (address, messages){
+    fetchMessages: function (address, messages, reverse = false){
         return this.$IOTA.findTransactionObjects({ addresses: [address] })
         .then(transactions => {
             for (let i = 0; i < transactions.length; i++) {
@@ -35,7 +43,7 @@ export default {
                     if(messages.findIndex((element) => element['hash'] == bundle[0].hash) < 0){
                         msg2['timestamp'] = bundle[0].timestamp
                         msg2['hash'] = bundle[0].hash
-                        sortedTimestampInsert(messages, msg2)
+                        sortedTimestampInsert(messages, msg2, reverse)
                     }
                     return null
                     

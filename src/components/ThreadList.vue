@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     fetchThreads: function() {
-      this.fetchMessages(this.$boardAddress, this.threads)
+      this.fetchMessages(this.$boardAddress, this.threads, true)
     },
     startAutoFetchingThreads: function() {
       this.fetchThreads()
