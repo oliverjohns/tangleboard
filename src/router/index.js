@@ -1,15 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Call from '../views/Call.vue'
+import Caller from '../views/Caller.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/Call',
+    name: 'Call',
+    component: Call
+  },
+  {
+    path: '/Caller',
+    name: 'Caller',
+    component: Caller
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home
   },
+
   {
     path: '/threadviewer/:name/:timestamp',
     name: 'threadviewer',

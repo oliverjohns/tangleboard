@@ -57,10 +57,38 @@ export default {
             return null;
             // ...
         })
-        
     },
-    postMessage: function (message, addr) {
-
+    
+        fetchMessagesWithTags: function (address, messages, tags){
+            return this.$IOTA.findTransactionObjects({ addresses: [address], tags:tags })
+            .then(transactions => {
+                for (let i = 0; i < transactions.length; i++) {
+                    let transaction = transactions[i]
+                    
+                    this.$IOTA.getBundle(transaction.hash)
+                    .then(bundle => {
+                        let msg = this.$Extract.extractJson(bundle)
+                        let msg2 = JSON.parse(msg)
+                        
+                        messages.push(msg2);
+                        return null
+                        
+                    })
+                    .catch(err => {
+                        //console.error(err);
+                        return err
+                    });
+                  }
+                  return null;
+        
+            })
+            .catch( err => {
+                //console.log(err)
+                return err;
+                // ...
+            })
+    },
+    postMessage: function (message, addr, tag="9999999999999999999999") {
         const jsonThread = JSON.stringify(message)
         const messageInTrytes = this.$Converter.asciiToTrytes(jsonThread)
   
@@ -68,11 +96,13 @@ export default {
         'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKBXPVCBMMCXWMNPDX';
         const depth = 3;
         const minimumWeightMagnitude = 9;
+        console.log(messageInTrytes.length)
         const transfers = [
         {
             value: 0,
             address: addr,
-            message: messageInTrytes
+            message: messageInTrytes,
+            tag:tag
         }
         ];
   
@@ -91,5 +121,8 @@ export default {
       },
     generateAddressFromName: function (name, timestamp) {
         return this.$boardName + this.$Converter.asciiToTrytes(this.$MD5(name+timestamp))
+    },
+    generateTag: function (name) {
+        return this.$Converter.asciiToTrytes(this.$MD5(name)).slice(0,27)
     }
   }
