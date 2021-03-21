@@ -60,5 +60,6 @@ a {
 .oswald {
       font-family: "Oswald", Helvetica, Arial;
     font-size: 70px;
+    margin-top: 0px;
 }
 </style>

@@ -77,12 +77,13 @@ a {
 }
 .threadlist {
   background: rgb(238,238,238);
-  padding: 10px 50px;
+  padding: 20px 50px;
   display:table;
   margin: 30px auto;
 }
 .oswald {
       font-family: "Oswald", Helvetica, Arial;
     font-size: 70px;
+    margin-top: 0px;
 }
 </style>

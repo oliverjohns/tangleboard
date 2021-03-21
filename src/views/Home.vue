@@ -10,8 +10,8 @@
         <option value=2>2s</option>
       </select>
     </div>
-    <CreateThread msg="Create a new thread"/>
     <ThreadList msg="ThreadList"/>
+    <CreateThread msg="Create a new thread"/>
   </div>
 </template>
 

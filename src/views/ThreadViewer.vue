@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>{{this.$route.params.name}}</h1>
-    <MessageList :messages=messages />
+    <MessageList :threadTimestamp=$route.params.timestamp :threadName=$route.params.name :messages=messages />
     <CreateMessage :threadName=$route.params.name :threadTimestamp=$route.params.timestamp />
   </div>
 </template>
