@@ -20,7 +20,7 @@
 import iota from '../iota.js'
 export default {
   created: function () {
-    this.postMessage = iota.postMessage
+    this.postThread = iota.postThread
   },
   name: 'CreateThread',
   data: function () {
@@ -34,8 +34,21 @@ export default {
   methods: {
     createThread: function () {
       const threadName = this.threadNameInput;
-      this.postMessage({"name": threadName}, this.$boardAddress)
-      this.$router.push({ name: 'threadviewer', params: { name: threadName } })
+      let returnedTimestamp = null
+      console.log(this.postThread)
+      this.postThread({"name": threadName}, this.$boardAddress).then(bundle => {
+            returnedTimestamp = bundle[0].timestamp
+            console.log("timeSTAAAAAAAMP", returnedTimestamp)
+            console.log(bundle[0].hash)
+            this.$router.push({ name: 'threadviewer', params: { name: threadName, timestamp: returnedTimestamp } })
+        })
+        .catch(err => {
+            console.error(err)
+        });
+        this.threadNameInput = ""
+      
+      //console.log("not null anymore!!!", returnedTimestamp)
+      //
     }
   }
 }

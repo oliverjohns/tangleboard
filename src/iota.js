@@ -33,7 +33,7 @@ export default {
                         return null
                     }
                     if(messages.findIndex((element) => element['hash'] == bundle[0].hash) < 0){
-                        msg2['timestamp'] = transaction.timestamp
+                        msg2['timestamp'] = bundle[0].timestamp
                         msg2['hash'] = bundle[0].hash
                         sortedTimestampInsert(messages, msg2)
                     }
@@ -84,6 +84,28 @@ export default {
             console.error(err)
         });
   
+      },
+      postThread: function (message, addr) {
+
+        const jsonThread = JSON.stringify(message)
+        const messageInTrytes = this.$Converter.asciiToTrytes(jsonThread)
+  
+        const seed =
+        'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKBXPVCBMMCXWMNPDX';
+        const depth = 3;
+        const minimumWeightMagnitude = 9;
+        const transfers = [
+        {
+            value: 0,
+            address: addr,
+            message: messageInTrytes
+        }
+        ];
+  
+        return this.$IOTA.prepareTransfers(seed, transfers)
+        .then(trytes => {
+            return this.$IOTA.sendTrytes(trytes, depth, minimumWeightMagnitude);
+        })
       },
     generateAddressFromName: function (name, timestamp) {
         return this.$boardName + this.$Converter.asciiToTrytes(this.$MD5(name+timestamp))
