@@ -74,6 +74,10 @@ a {
 }
 .threads th {
   text-align: left;
+  max-width: 1000px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .threadlist {
   background: rgb(238,238,238);

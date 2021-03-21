@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 
 Vue.config.productionTip = false
-Vue.prototype.$boardAddress = 'DATENTRALIZEDCHANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-Vue.prototype.$boardName = 'DATENTRALIZEDCHAN'
+Vue.prototype.$boardAddress = 'DAHENTRALIZEDCHANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+Vue.prototype.$boardName = 'DAHENTRALIZEDCHAN'
 Vue.prototype.$IOTA = require('@iota/core').composeAPI({
   provider: 'https://nodes.devnet.iota.org:443'
   });

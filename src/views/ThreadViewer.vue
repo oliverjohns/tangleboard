@@ -1,10 +1,18 @@
 <template>
   <div class="about">
-    <h1>{{this.$route.params.name}}</h1>
+    <h1 class="threadheader">{{this.$route.params.name}}</h1>
     <MessageList :threadTimestamp=$route.params.timestamp :threadName=$route.params.name :messages=messages />
     <CreateMessage :threadName=$route.params.name :threadTimestamp=$route.params.timestamp />
   </div>
 </template>
+
+<style>
+.threadheader {
+  overflow-wrap: break-word;
+  padding: 0 40px;
+}
+</style>
+
 <script>
 import MessageList from '@/components/MessageList.vue'
 import CreateMessage from '@/components/CreateMessage.vue'
