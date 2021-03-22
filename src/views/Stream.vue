@@ -1,5 +1,5 @@
 <template>
-  <div class="call">
+  <div class="AudioStream">
     <div>
       <p>Refresh interval</p>
       <select v-model="refreshTime" @change="onChangeRefreshTime($event)" name="refreshtime" id="refreshtime">
@@ -9,18 +9,18 @@
         <option value=4>4s</option>
       </select>
     </div>
-    <Test msg="Streams"/>
+    <Stream msg="Streams"/>
 
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Test from '@/components/Test.vue'
+import Stream from '@/components/Stream.vue'
 import {globalSettings} from '../main.js'
 
 export default {
-  name: 'Call',
+  name: 'AudioStream',
   data: function() {
     
     return {
@@ -35,7 +35,7 @@ export default {
     }
   },
   components: {
-    Test
+    Stream
   }
 }
 </script>

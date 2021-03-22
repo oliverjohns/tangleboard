@@ -70,7 +70,7 @@ export default {
           let signalData = {Data:data, key:this.sessionkey}
           this.postMessage(signalData, this.$chatAddress, this.generateTag(streamTag))
         }
-        else if (data.type == "candidate" && !this.candidateSent){
+        else if (data.type == "candidate"){
           this.candidateSent=true
           let signalData = {Data:data, key:this.sessionkey}
           this.postMessage(signalData, this.$chatAddress, this.generateTag(streamTag))

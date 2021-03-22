@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Call from '../views/Call.vue'
 import Caller from '../views/Caller.vue'
+import Stream from '../views/Stream.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ const routes = [
     path: '/Caller',
     name: 'Caller',
     component: Caller
+  },
+  {
+    path: '/Streams',
+    name: 'Streams',
+    component: Stream
   },
   {
     path: '/',

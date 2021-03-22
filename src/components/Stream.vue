@@ -1,12 +1,16 @@
 <template>
   
   <div class="hello">
+    <div class="viddiv">
+
+      <video id="Video" playsinline controls loop muted> </video>
+    </div>
     <h1>{{ msg }}</h1>
-    
     <input v-model="tag" type="text">
     <button v-on:click="CreateStream()">Create Stream</button>
+    <MessageList :threadTimestamp=$route.params.timestamp :threadName=$route.params.name :messages=messages />
     <button v-on:click="Connect()">Connec</button>
-    <video id="Video" playsinline controls loop muted> </video>
+
     
 
   </div>
