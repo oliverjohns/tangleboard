@@ -30,21 +30,16 @@ var ExtractBundle = function (bundle){
         data[bundle[i].currentIndex] = bundle[i].signatureMessageFragment
     }
     return UTFConverter.utf8StringFromTrytes(data.join())
-     
     
 }
 export default {
-    ExtractBundle: function (bundle){
-        let data = new Array(bundle[0].lastIndex)
-        for (let i = 0; i<=bundle[0].lastIndex; i++){
-            data[bundle[i].currentIndex] = bundle[i].signatureMessageFragment
-        }
-        return this.$UTFConverter.utf8StringFromTrytes(data.join())
-         
-        
+    addMessage: function(bundle, messages){
+        let msg = JSON.parse(ExtractBundle(bundle))
+        msg['timestamp'] = bundle[0].timestamp
+        msg['hash'] = bundle[0].hash
+        console.log(msg)
+        messages.push(msg)
     },
-
-
     fetchMessages: function (address, messages, reverse = false){
         return this.$IOTA.findTransactionObjects({ addresses: [address] })
         .then(transactions => {
@@ -67,16 +62,16 @@ export default {
                     return null
                     
                 })
-                .catch(err => {
-                    console.error(err);
+                .catch(() => {
+                    //console.error(err);
                     return null
                 });
               }
               return null;
     
         })
-        .catch(err => {
-            console.log(err)
+        .catch(() => {
+            //console.log(err)
             return null;
             // ...
         })
@@ -101,16 +96,13 @@ export default {
         }
         ];
   
-        this.$IOTA.prepareTransfers(seed, transfers)
+        return this.$IOTA.prepareTransfers(seed, transfers)
         .then(trytes => {
             return this.$IOTA.sendTrytes(trytes, depth, minimumWeightMagnitude);
         })
-        .then(bundle => {
-            console.log(bundle[0].hash)
-  
-        })
         .catch(err => {
             console.error(err)
+            return null
         });
   
       },

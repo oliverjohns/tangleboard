@@ -18,6 +18,7 @@ import iota from '../iota.js'
 export default {
   created: function () {
     this.postMessage = iota.postMessage
+    this.addMessage = iota.addMessage
     this.generateAddressFromName = iota.generateAddressFromName
   },
   name: 'CreateMessage',
@@ -35,11 +36,17 @@ export default {
       this.messageInput = `${this.messageInput}\n`;
     },
     postMessageButton: function () {
-      console.log("threadName", this.threadName)
+      
+      //console.log("threadName", this.threadName)
+      //console.log(this.$parent.messages)
       let threadAddress = this.generateAddressFromName(this.threadName, this.threadTimestamp)
-      console.log("threadAddr", threadAddress)
+      //console.log("threadAddr", threadAddress)
       let msg = this.messageInput
-      this.postMessage({"message": msg}, threadAddress)
+      this.messageInput = ""
+      this.postMessage({"message": msg}, threadAddress).then(async bundle => {
+        this.addMessage(bundle, this.$parent.messages)
+        return null
+      })
       this.messageInput = ""
     }
   }
