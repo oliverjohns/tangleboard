@@ -2,12 +2,12 @@
   <div class="threadlist">
     <h1 class="oswald">{{ msg }}</h1>
 
- <table class="threads">
+  <table class="threads">
   <tr v-for="thread in threads" :key="thread.hash">
     <th><router-link :to="{ name: 'threadviewer', params: { name: thread['name'], timestamp: thread['timestamp'] }}">{{thread['name']}}</router-link></th>
     <th>{{new Date(thread['timestamp']*1000).toLocaleString()}}</th>
   </tr>
-</table> 
+  </table> 
   </div>
 </template>
 
@@ -80,7 +80,8 @@ a {
   text-overflow: ellipsis;
 }
 .threadlist {
-  background: rgb(238,238,238);
+  background-image: url("../assets/sky.gif");
+  background-size:100% 100%;
   padding: 20px 50px;
   display:table;
   margin: 30px auto;

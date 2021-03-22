@@ -10,7 +10,8 @@
 </template>
 <style>
 .createthread {
-  background: rgb(238,238,238);
+  background-image: url("../assets/sky.gif");
+  background-size:100% 100%;
   padding: 30px 50px;
   margin: 10px auto;
   display: table;
