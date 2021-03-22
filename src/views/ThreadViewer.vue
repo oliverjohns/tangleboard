@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <router-link to="/">Home</router-link>
     <h1 class="threadheader">{{this.$route.params.name}}</h1>
     <MessageList :threadTimestamp=$route.params.timestamp :threadName=$route.params.name :messages=messages />
     <CreateMessage :threadName=$route.params.name :threadTimestamp=$route.params.timestamp />
