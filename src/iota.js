@@ -41,6 +41,7 @@ export default {
         messages.push(msg)
     },
     fetchMessages: function (address, messages, reverse = false){
+        console.log("fetching...")
         return this.$IOTA.findTransactionObjects({ addresses: [address] })
         .then(transactions => {
             for (let i = 0; i < transactions.length; i++) {
@@ -49,7 +50,6 @@ export default {
                 this.$IOTA.getBundle(transaction.hash)
                 .then(bundle => {
                     let msg = ExtractBundle(bundle)
-                    console.log(msg)
                     let msg2 = JSON.parse(msg)
                     if (!msg2['message'] && !msg2['name']) {
                         return null

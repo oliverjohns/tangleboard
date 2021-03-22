@@ -36,11 +36,7 @@ export default {
       this.messageInput = `${this.messageInput}\n`;
     },
     postMessageButton: function () {
-      
-      //console.log("threadName", this.threadName)
-      //console.log(this.$parent.messages)
       let threadAddress = this.generateAddressFromName(this.threadName, this.threadTimestamp)
-      //console.log("threadAddr", threadAddress)
       let msg = this.messageInput
       this.messageInput = ""
       this.postMessage({"message": msg}, threadAddress).then(async bundle => {

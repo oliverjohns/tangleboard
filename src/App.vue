@@ -1,5 +1,15 @@
 <template>
   <div id="app">
+    <div class="refreshTimeSetter">
+      <p>Refresh interval</p>
+      <select  v-model="refreshTime" @change="onChangeRefreshTime($event)" name="refreshtime" id="refreshtime">
+        <option value=0>Off</option>
+        <option value=30>30s</option>
+        <option value=10>10s</option>
+        <option value=4>4s</option>
+        <option value=2>2s</option>
+      </select>
+    </div>
     <div id="nav">
       <img class="globe" src="./assets/globe2.gif">
       <h1 class="title">TangleBoard</h1>
@@ -10,10 +20,45 @@
 </template>
 
 <script>
+import {globalSettings} from './main.js'
+
+export default {
+  name: 'App',
+  data: function() {
+    return {
+      refreshTime: globalSettings.refreshTime
+    }
+  },
+  methods: {
+    onChangeRefreshTime: function(event) {
+      globalSettings.refreshTime = event.target.value
+      this.refreshTime = event.target.value
+    }
+  }
+}
 </script>
 
 
 <style>
+.refreshTimeSetter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  padding: 10px;
+}
+.refreshTimeSetter p {
+  float:left;
+  padding: 0;
+  margin: 0;
+  padding-top: 2px;
+}
+.refreshTimeSetter select {
+  float:left;
+  margin-left: 15px;
+}
+
+
 @font-face {
   font-family: "Mexcellent";
   src: local("Mexcellent"),   url(./assets/fonts/mexcellent.3d.otf) format("opentype");}
