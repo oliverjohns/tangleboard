@@ -1,3 +1,4 @@
+let UTFConverter = require('tryte-utf8-json-codec');
 var sortedTimestampInsert = function (arr, e, reverse) {
     
     if (arr.length == 0) {
@@ -23,8 +24,25 @@ var sortedTimestampInsert = function (arr, e, reverse) {
     arr.splice(0, 0, e);
     return arr
   }
+var ExtractBundle = function (bundle){
+    let data = new Array(bundle[0].lastIndex)
+    for (let i = 0; i<=bundle[0].lastIndex; i++){
+        data[bundle[i].currentIndex] = bundle[i].signatureMessageFragment
+    }
+    return UTFConverter.utf8StringFromTrytes(data.join())
+     
+    
+}
 export default {
-
+    ExtractBundle: function (bundle){
+        let data = new Array(bundle[0].lastIndex)
+        for (let i = 0; i<=bundle[0].lastIndex; i++){
+            data[bundle[i].currentIndex] = bundle[i].signatureMessageFragment
+        }
+        return this.$UTFConverter.utf8StringFromTrytes(data.join())
+         
+        
+    },
 
 
     fetchMessages: function (address, messages, reverse = false){
@@ -35,7 +53,8 @@ export default {
                 
                 this.$IOTA.getBundle(transaction.hash)
                 .then(bundle => {
-                    let msg = this.$Extract.extractJson(bundle)
+                    let msg = ExtractBundle(bundle)
+                    console.log(msg)
                     let msg2 = JSON.parse(msg)
                     if (!msg2['message'] && !msg2['name']) {
                         return null
@@ -63,10 +82,12 @@ export default {
         })
         
     },
+   
+    
     postMessage: function (message, addr) {
 
         const jsonThread = JSON.stringify(message)
-        const messageInTrytes = this.$Converter.asciiToTrytes(jsonThread)
+        const messageInTrytes = this.$UTFConverter.trytesFromUTF8String(jsonThread)
   
         const seed =
         'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKBXPVCBMMCXWMNPDX';
@@ -96,7 +117,7 @@ export default {
       postThread: function (message, addr) {
 
         const jsonThread = JSON.stringify(message)
-        const messageInTrytes = this.$Converter.asciiToTrytes(jsonThread)
+        const messageInTrytes = this.$UTFConverter.trytesFromUTF8String(jsonThread)
   
         const seed =
         'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKBXPVCBMMCXWMNPDX';

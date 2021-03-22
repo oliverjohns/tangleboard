@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <img class="globe" src=".\assets\globe2.gif">
+      <img class="globe" src="./assets/globe2.gif">
       <h1 class="title">TangleBoard</h1>
       <router-link to="/">Home</router-link>
     </div>

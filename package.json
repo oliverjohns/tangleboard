@@ -14,6 +14,7 @@
     "core-js": "^3.6.5",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
+    "tryte-utf8-json-codec": "^1.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1"
   },
