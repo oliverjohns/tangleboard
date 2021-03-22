@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <router-link to="/">Home</router-link>
+    <a class="homelink" @click="$router.go(-1)">Home</a>
     <h1 class="threadheader">{{this.$route.params.name}}</h1>
     <MessageList :threadTimestamp=$route.params.timestamp :threadName=$route.params.name :messages=messages />
     <CreateMessage :threadName=$route.params.name :threadTimestamp=$route.params.timestamp />
@@ -11,6 +11,9 @@
 .threadheader {
   overflow-wrap: break-word;
   padding: 0 40px;
+}
+.homelink {
+  cursor: pointer;
 }
 </style>
 
@@ -43,7 +46,6 @@ export default {
     },
     startAutoFetchingMessages: function() {
       this.fetchMessagesforThread()
-      console.log("refresh time is: " + globalSettings.refreshTime * 1000)   
       if (globalSettings.refreshTime > 0) {
         this.intervalid1 = setInterval(function(){
             this.fetchMessagesforThread()

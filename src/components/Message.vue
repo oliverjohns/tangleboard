@@ -8,7 +8,7 @@
       <span class="msgbody">
           <a 
           v-if="'replyTarget' in msg" 
-          v-on:hover="console.log('hi')" 
+          v-on:hover="('hi')" 
           class="replyhash"
           @mouseover="$parent.hoverOn(msg.replyTarget)"
           @mouseleave="$parent.hoverOff()">
@@ -40,10 +40,6 @@ export default {
         this.postMessage(msgJSON, threadAddress)
       }
     },
-    test: function() {
-      console.log("boi")
-      console.log(this.hoverTarget)
-    }
   },
   props: {
     msg: Object,

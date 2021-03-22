@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <ThreadList msg="Threads"/>
-    <CreateThread msg="Create a new thread"/>
+    <router-view/>
+    <span v-if="$router.currentRoute.name != 'threadviewer'" >
+      <ThreadList msg="Threads"/>
+      <CreateThread msg="Create a new thread"/>
+    </span>
   </div>
 </template>
 
@@ -18,15 +21,18 @@ export default {
       refreshTime: globalSettings.refreshTime
     }
   },
-  methods: {
-    onChangeRefreshTime: function(event) {
-      globalSettings.refreshTime = event.target.value
-      this.refreshTime = event.target.value
-    }
-  },
+  methods: {},
   components: {
     ThreadList,
     CreateThread
+  },
+  props: {
+    boardName: String
+  },
+  beforeMount() {
+    globalSettings.boardName = this.$route.params.boardName.toUpperCase()
+    globalSettings.boardAddress = globalSettings.boardName + "A".repeat(64 + 17 - globalSettings.boardName.length)
+    
   }
 }
 </script>

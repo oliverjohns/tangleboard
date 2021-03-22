@@ -1,4 +1,5 @@
 let UTFConverter = require('tryte-utf8-json-codec');
+import {globalSettings} from './main.js'
 var sortedTimestampInsert = function (arr, e, reverse) {
     
     if (arr.length == 0) {
@@ -37,11 +38,9 @@ export default {
         let msg = JSON.parse(ExtractBundle(bundle))
         msg['timestamp'] = bundle[0].timestamp
         msg['hash'] = bundle[0].hash
-        console.log(msg)
         messages.push(msg)
     },
     fetchMessages: function (address, messages, reverse = false){
-        console.log("fetching...")
         return this.$IOTA.findTransactionObjects({ addresses: [address] })
         .then(transactions => {
             for (let i = 0; i < transactions.length; i++) {
@@ -129,6 +128,6 @@ export default {
         })
       },
     generateAddressFromName: function (name, timestamp) {
-        return this.$boardName + this.$Converter.asciiToTrytes(this.$MD5(name+timestamp))
+        return globalSettings.boardName + 'A'.repeat(17 - globalSettings.boardName.length) +  this.$Converter.asciiToTrytes(this.$MD5(name+timestamp))
     }
   }

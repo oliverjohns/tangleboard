@@ -19,6 +19,7 @@
 </style>
 <script>
 import iota from '../iota.js'
+import {globalSettings} from '../main.js'
 export default {
   created: function () {
     this.postThread = iota.postThread
@@ -36,11 +37,8 @@ export default {
     createThread: function () {
       const threadName = this.threadNameInput;
       let returnedTimestamp = null
-      console.log(this.postThread)
-      this.postThread({"name": threadName}, this.$boardAddress).then(bundle => {
+      this.postThread({"name": threadName}, globalSettings.boardAddress).then(bundle => {
             returnedTimestamp = bundle[0].timestamp
-            console.log("timeSTAAAAAAAMP", returnedTimestamp)
-            console.log(bundle[0].hash)
             this.$router.push({ name: 'threadviewer', params: { name: threadName, timestamp: returnedTimestamp } })
         })
         .catch(err => {

@@ -3,9 +3,6 @@ import App from './App.vue'
 import router from './router'
 
 Vue.config.productionTip = false
-Vue.prototype.$boardAddress = 'DATTTTRALIZEDCHANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-
-Vue.prototype.$boardName = 'DAHENTRALIZEDCHAN'
 Vue.prototype.$IOTA = require('@iota/core').composeAPI({
   provider: 'https://nodes.devnet.iota.org:443'
   });
@@ -16,7 +13,9 @@ Vue.prototype.$MD5 = require('md5');
 
 export const globalSettings = new Vue({
   data: {
-    refreshTime: 4
+    refreshTime: 4,
+    boardAddress:  'DATTTTRALIZEDCHANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    boardName:   'DATTTTRALIZEDCHAN'
   }
 })
 
