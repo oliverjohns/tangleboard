@@ -74,7 +74,6 @@ a {
   background: rgb(150,150,150);
   background: linear-gradient(270deg, rgba(150,150,150,1) 0%, rgba(245,206,255,0) 0%, rgba(158,251,255,1) 32%);
   width:600px;
-  height:100px;
   padding:10px;
   margin:10px auto;
 }
@@ -86,6 +85,8 @@ a {
 .messagetext {
   text-align:left;
   overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-line;
   margin:0;
 }
 .timestamp {
