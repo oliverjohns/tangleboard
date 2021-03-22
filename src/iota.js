@@ -92,7 +92,7 @@ export default {
         const seed =
         'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKBXPVCBMMCXWMNPDX';
         const depth = 3;
-        const minimumWeightMagnitude = 14;
+        const minimumWeightMagnitude = 9;
         const transfers = [
         {
             value: 0,
@@ -122,7 +122,7 @@ export default {
         const seed =
         'PUEOTSEITFEVEWCWBTSIZM9NKRGJEIMXTULBACGFRQK9IMGICLBKW9TTEVSDQMGWKBXPVCBMMCXWMNPDX';
         const depth = 3;
-        const minimumWeightMagnitude = 14;
+        const minimumWeightMagnitude = 9;
         const transfers = [
         {
             value: 0,

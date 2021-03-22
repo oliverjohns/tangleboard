@@ -7,8 +7,7 @@ Vue.prototype.$boardAddress = 'DATTTTRALIZEDCHANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 Vue.prototype.$boardName = 'DAHENTRALIZEDCHAN'
 Vue.prototype.$IOTA = require('@iota/core').composeAPI({
-  provider:  'https://nodes.thetangle.org:443'
-
+  provider: 'https://nodes.devnet.iota.org:443'
   });
 
 Vue.prototype.$UTFConverter = require('tryte-utf8-json-codec');
