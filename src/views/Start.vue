@@ -1,7 +1,7 @@
 <template>
   <div class="start">
     <h1 class="oswald">Choose board</h1>
-    <input v-model="boardNameInput" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)">
+    <input v-model="boardNameInput" type="text" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
     <button :disabled='boardNameInput.length > 17' v-on:click="enterBoard()">Enter</button>
   </div>
 </template>
