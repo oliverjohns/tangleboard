@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <a class="homelink" @click="$router.go(-1)">Home</a>
+    <a class="homelink" @click="goHome()">Home</a>
     <h1 class="threadheader">{{this.$route.params.name}}</h1>
     <MessageList :threadTimestamp=$route.params.timestamp :threadName=$route.params.name :messages=messages />
     <CreateMessage :threadName=$route.params.name :threadTimestamp=$route.params.timestamp />
@@ -41,6 +41,9 @@ export default {
     }
   },
   methods: {
+    goHome() {
+      this.$router.push({ name: 'Home', params: { boardName: globalSettings.boardName} })
+    },
     fetchMessagesforThread: function () {
       this.fetchMessages(this.threadAdress, this.messages)
     },
