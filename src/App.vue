@@ -10,6 +10,11 @@
         <option value=2>2s</option>
       </select>
     </div>
+    <div class="setID">
+      <input type="checkbox" id="setID" name="setID" @change="checking($event)" checked>
+         <p>Use ID</p>
+    </div>
+    
     <div id="nav">
       <img class="globe" src="./assets/globe2.gif">
       <h1 class="title">TangleBoard</h1>
@@ -25,13 +30,19 @@ export default {
   name: 'App',
   data: function() {
     return {
+      
       refreshTime: globalSettings.refreshTime
     }
   },
   methods: {
     onChangeRefreshTime: function(event) {
+      
       globalSettings.refreshTime = event.target.value
       this.refreshTime = event.target.value
+    },
+    checking: function(event) {
+      //globalSettings.UseID
+      console.log(event.target.checked)
     }
   }
 }
@@ -54,6 +65,23 @@ export default {
 }
 .refreshTimeSetter select {
   float:left;
+  margin-left: 15px;
+}
+.setID {
+  position: fixed;
+  top: ;
+  left: 0;
+  width: 300px;
+  padding: 10px;
+}
+.setID p {
+  float:left;
+  margin-top:  33px;
+  margin-left: 5px;
+}
+.setID input {
+  float:left;
+  margin-top:  35px;
   margin-left: 15px;
 }
 

@@ -14,6 +14,8 @@ Vue.prototype.$MD5 = require('md5');
 export const globalSettings = new Vue({
   data: {
     refreshTime: 4,
+    UseID: false,
+    PrivateKey: "",
     boardAddress:  'DATTTTRALIZEDCHANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
     boardName:   'DATTTTRALIZEDCHAN'
   }
