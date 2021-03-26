@@ -5,22 +5,40 @@
         <button v-on:click="openReplyPrompt()" class="replybutton" type="button">Reply</button>
         <p class="timestamp">{{new Date(msg.timestamp*1000).toLocaleString()}}</p>
       </span>
-      <span class="msgbody">
-          <a 
-          v-if="'replyTarget' in msg" 
-          v-on:hover="('hi')" 
-          class="replyhash"
-          @mouseover="$parent.hoverOn(msg.replyTarget)"
-          @mouseleave="$parent.hoverOff()">
-            >{{msg.replyTarget.substring(1, 10)}}
-          </a>
-      <p class="messagetext">{{msg.message}}</p>
-      </span>
+      <div class="msgbody">
+        <div v-if="imgUrl != null" class="thumbnail">
+              <img
+                :src=imgUrl
+                v-on:click="openLightBox()"
+              >
+        </div>
+        <div class="msgbodyinner">
+            
+            <LightBox
+              ref="lightbox"
+              :show-caption="true"
+              :show-light-box="false"
+            />
+            <a 
+            v-if="'replyTarget' in msg" 
+            v-on:hover="('hi')" 
+            class="replyhash"
+            @mouseover="$parent.hoverOn(msg.replyTarget)"
+            @mouseleave="$parent.hoverOff()">
+              >{{msg.replyTarget.substring(1, 10)}}
+            </a>
+        <p class="messagetext">{{msg.message}}</p>
+        </div>
+      </div>
   </div>
 </template>
 <script>
 import iota from '../iota.js'
+import LightBox from './LightBox'
 export default {
+  components: {
+    LightBox,
+  },
   created: function () {
     this.postMessage = iota.postMessage
     this.generateAddressFromName = iota.generateAddressFromName
@@ -28,7 +46,9 @@ export default {
   name: 'Message',
   data: function () {
     return {
-      hover: true
+      hover: true,
+      imgUrlRegexp : /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/,
+      imgUrl: null
     }
   },
   methods: {
@@ -40,6 +60,18 @@ export default {
         this.postMessage(msgJSON, threadAddress)
       }
     },
+    openLightBox: function() {
+      let imgObject = { src: this.imgUrl, id: 0, type: "image", srcset: "", caption: this.imgUrl}
+      this.$refs.lightbox.showImage(imgObject)
+    }
+  },
+  mounted() {
+    let imgUrlArr = this.msg.message.match(this.imgUrlRegexp)
+    if (imgUrlArr != null) {
+      this.imgUrl = imgUrlArr[0]
+      this.msg.message = this.msg.message.replace(this.imgUrl,'')
+    }
+      
   },
   props: {
     msg: Object,
@@ -72,6 +104,25 @@ a {
   width:600px;
   padding:10px;
   margin:10px auto;
+}
+
+.thumbnail {
+  flex: 0 0 25%;
+}
+
+.thumbnail img {
+  cursor: pointer;
+  max-width:100%;
+  object-fit:cover;
+}
+.msgbody {
+  display: flex;
+  
+}
+
+.msgbodyinner {
+  flex: 1;
+  padding-left: 30px;
 }
 
 .highlight {
@@ -124,6 +175,8 @@ a {
   width:100%;
   padding-bottom: 15px;
 }
+
+/* IMAGE STUFF */
 
 
 </style>
