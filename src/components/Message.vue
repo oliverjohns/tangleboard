@@ -35,7 +35,7 @@
             </a>
         <p class="messagetext">{{refinedMessage}}</p>
         <div class="youtubeEmbed">
-          <iframe v-if="imgUrl == null && youtubeEmbedUrl != null" width="440" height="248" :src=youtubeEmbedUrl title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe v-if="imgUrl == null && youtubeEmbedUrl != null" :src=youtubeEmbedUrl title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         </div>
       </div>
@@ -128,6 +128,7 @@ a {
 .message {
   background: rgb(150,150,150);
   background: linear-gradient(270deg, rgba(150,150,150,1) 0%, rgba(245,206,255,0) 0%, rgba(158,251,255,1) 32%);
+  max-width:90vw;
   width:600px;
   padding:10px;
   margin:10px auto;
@@ -216,12 +217,14 @@ a {
 
 .youtubeEmbed {
   padding-top: 15px;
-  margin-left: -42px;
 }
 
 .youtubeEmbed iframe {
   padding: 0;
   margin: 0;
+  width: 440px; 
+  height: 248px;
+  max-width: 90vw;
 }
 
 

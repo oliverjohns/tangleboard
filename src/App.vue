@@ -111,6 +111,7 @@ export default {
 .title {
     font-family: "Mexcellent", Helvetica, Arial;
     font-size: 15vw;
+    text-align:center;
     margin: 2vh 0;
     max-width: 100%;
     color:#eeeeee;

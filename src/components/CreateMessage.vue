@@ -70,5 +70,6 @@ a {
 }
 .createmessagebox {
   width:600px;
+  max-width:90vw;
 }
 </style>
