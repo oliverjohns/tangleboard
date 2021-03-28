@@ -34,6 +34,7 @@
               >{{msg.replyTarget.substring(1, 10)}}
             </a>
         <p class="messagetext">{{msg.message}}</p>
+        <iframe class="youtubeEmbed" v-if="youtubeEmbedUrl != null" width="440" height="248" :src=youtubeEmbedUrl title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
   </div>
@@ -54,7 +55,8 @@ export default {
     return {
       hover: true,
       imgUrlRegexp : /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/,
-      imgUrl: null
+      imgUrl: null,
+      youtubeEmbedUrl: null
     }
   },
   methods: {
@@ -69,14 +71,29 @@ export default {
     openLightBox: function() {
       let imgObject = { src: this.imgUrl, id: 0, type: "image", srcset: "", caption: this.imgUrl}
       this.$refs.lightbox.showImage(imgObject)
+    },
+    findAndSetImgUrl() {
+      let imgUrlArr = this.msg.message.match(this.imgUrlRegexp)
+      if (imgUrlArr != null) {
+        this.imgUrl = imgUrlArr[0]
+        this.msg.message = this.msg.message.replace(this.imgUrl,'')
+      }
+    },
+    findAndEmbedYoutubeUrl() {
+      let urlArr = this.msg.message.match(/http[^ \n]*/)
+
+      if (urlArr != null) {
+        let youtubeUrl = urlArr.find((url) => { return this.$youtubeUrl.valid(url)})
+        if (youtubeUrl != undefined) {
+          let youtubeVideoId = this.$youtubeUrl.extractId(youtubeUrl);
+          this.youtubeEmbedUrl = 'https://www.youtube.com/embed/' + youtubeVideoId
+        }
+      }
     }
   },
   mounted() {
-    let imgUrlArr = this.msg.message.match(this.imgUrlRegexp)
-    if (imgUrlArr != null) {
-      this.imgUrl = imgUrlArr[0]
-      this.msg.message = this.msg.message.replace(this.imgUrl,'')
-    }
+    this.findAndSetImgUrl()
+    this.findAndEmbedYoutubeUrl()
       
   },
   props: {
@@ -191,6 +208,11 @@ a {
   display:table;
   width:100%;
   padding-bottom: 15px;
+}
+
+.youtubeEmbed {
+  padding-top:15px;
+  margin: 0;
 }
 
 /* IMAGE STUFF */
