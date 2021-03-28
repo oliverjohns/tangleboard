@@ -1,19 +1,26 @@
 <template>
   <div id="app">
-    <div class="refreshTimeSetter">
-      <p>Refresh interval</p>
-      <select  v-model="refreshTime" @change="onChangeRefreshTime($event)" name="refreshtime" id="refreshtime">
-        <option value=0>Off</option>
-        <option value=30>30s</option>
-        <option value=10>10s</option>
-        <option value=4>4s</option>
-        <option value=2>2s</option>
-      </select>
+    <div class="topLeftSettings">
+        <table>
+          <tr>
+            <th><p>Refresh interval</p></th>
+            <th>      
+              <select  v-model="refreshTime" @change="onChangeRefreshTime($event)" name="refreshtime" id="refreshtime">
+              <option value=0>Off</option>
+              <option value=30>30s</option>
+              <option value=10>10s</option>
+              <option value=4>4s</option>
+              <option value=2>2s</option>
+              </select>
+            </th>
+          </tr>
+          <tr>
+            <th><p>Use ID</p></th>
+            <th><input checked type="checkbox" id="setID" name="setID" @change="checking($event)"></th>
+          </tr>
+        </table>
     </div>
-    <div class="setID">
-      <input checked type="checkbox" id="setID" name="setID" @change="checking($event)">
-         <p>Use ID</p>
-    </div>
+
     
     <div id="nav">
       <img class="globe" src="./assets/globe2.gif">
@@ -59,40 +66,18 @@ export default {
 
 
 <style>
-.refreshTimeSetter {
+.topLeftSettings {
   position: fixed;
   top: 0;
   left: 0;
   width: 300px;
   padding: 10px;
 }
-.refreshTimeSetter p {
-  float:left;
-  padding: 0;
-  margin: 0;
-  padding-top: 2px;
+
+.topLeftSettings p {
+  text-align: left;
 }
-.refreshTimeSetter select {
-  float:left;
-  margin-left: 15px;
-}
-.setID {
-  position: fixed;
-  top: ;
-  left: 0;
-  width: 300px;
-  padding: 10px;
-}
-.setID p {
-  float:left;
-  margin-top:  33px;
-  margin-left: 5px;
-}
-.setID input {
-  float:left;
-  margin-top:  35px;
-  margin-left: 15px;
-}
+
 
 
 @font-face {
