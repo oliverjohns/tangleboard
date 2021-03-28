@@ -11,7 +11,7 @@
       </select>
     </div>
     <div class="setID">
-      <input type="checkbox" id="setID" name="setID" @change="checking($event)" checked>
+      <input type="checkbox" id="setID" name="setID" @change="checking($event)">
          <p>Use ID</p>
     </div>
     
@@ -25,7 +25,7 @@
 
 <script>
 import {globalSettings} from './main.js'
-
+import crypto from './Crypto.js'
 export default {
   name: 'App',
   data: function() {
@@ -40,9 +40,16 @@ export default {
       globalSettings.refreshTime = event.target.value
       this.refreshTime = event.target.value
     },
-    checking: function(event) {
-      //globalSettings.UseID
-      console.log(event.target.checked)
+    checking: async function(event) {
+      globalSettings.UseID = event.target.checked
+      if (globalSettings.UseID){
+        let res = await crypto.generateKey()
+        globalSettings.PrivateKey = res.privateKey
+        globalSettings.PublicKey  = res.publicKey
+
+        
+      }
+      
     }
   }
 }

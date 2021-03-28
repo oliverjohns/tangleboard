@@ -4,7 +4,6 @@
     
     <input v-model="threadNameInput" type="text">
     <button v-on:click="createThread()">Create</button>
-    
 
   </div>
 </template>
@@ -34,6 +33,12 @@ export default {
     msg: String
   },
   methods: {
+    previewFiles: function(event) {
+      console.log(event.target.files);
+      if (event.target.files.length > 0) {
+        this.img = event.target.files[0]
+      }
+    },
     createThread: function () {
       const threadName = this.threadNameInput;
       let returnedTimestamp = null
