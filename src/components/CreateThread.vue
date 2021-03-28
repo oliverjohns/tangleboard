@@ -51,8 +51,6 @@ export default {
         });
         this.threadNameInput = ""
       
-      //console.log("not null anymore!!!", returnedTimestamp)
-      //
     }
   }
 }
