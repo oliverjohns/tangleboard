@@ -69,6 +69,7 @@ export default {
                     if (!msg2['message'] && !msg2['name']) {
                         return null
                     }
+                    
                     if(messages.findIndex((element) => element['hash'] == bundle[0].hash) < 0){
                         msg2['timestamp'] = bundle[0].timestamp
                         msg2['hash'] = bundle[0].hash

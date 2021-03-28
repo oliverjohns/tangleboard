@@ -76,6 +76,16 @@ export default {
 
 .topLeftSettings p {
   text-align: left;
+  padding:0;
+  margin:0;
+}
+.topLeftSettings tr {
+
+}
+.topLeftSettings th {
+  width: 0;
+  white-space: nowrap;
+
 }
 
 
@@ -93,16 +103,23 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
+  width: 100vw;
   top:0;
   margin:0;
 }
 
 .title {
     font-family: "Mexcellent", Helvetica, Arial;
-    font-size: 150px;
+    font-size: 15vw;
+    margin: 2vh 0;
+    max-width: 100%;
     color:#eeeeee;
     -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+}
+
+.globe {
+  width: 25vw;
 }
 
 #nav {
@@ -117,4 +134,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #77006d;
 }
+
 </style>

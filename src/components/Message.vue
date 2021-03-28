@@ -33,8 +33,10 @@
             @mouseleave="$parent.hoverOff()">
               >{{msg.replyTarget.substring(1, 10)}}
             </a>
-        <p class="messagetext">{{msg.message}}</p>
-        <iframe class="youtubeEmbed" v-if="youtubeEmbedUrl != null" width="440" height="248" :src=youtubeEmbedUrl title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p class="messagetext">{{refinedMessage}}</p>
+        <div class="youtubeEmbed">
+          <iframe v-if="imgUrl == null && youtubeEmbedUrl != null" width="440" height="248" :src=youtubeEmbedUrl title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         </div>
       </div>
   </div>
@@ -56,7 +58,8 @@ export default {
       hover: true,
       imgUrlRegexp : /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/,
       imgUrl: null,
-      youtubeEmbedUrl: null
+      youtubeEmbedUrl: null,
+      refinedMessage: null
     }
   },
   methods: {
@@ -76,7 +79,7 @@ export default {
       let imgUrlArr = this.msg.message.match(this.imgUrlRegexp)
       if (imgUrlArr != null) {
         this.imgUrl = imgUrlArr[0]
-        this.msg.message = this.msg.message.replace(this.imgUrl,'')
+        this.refinedMessage = this.refinedMessage.replace(this.imgUrl,'')
       }
     },
     findAndEmbedYoutubeUrl() {
@@ -92,6 +95,7 @@ export default {
     }
   },
   mounted() {
+    this.refinedMessage = this.msg.message
     this.findAndSetImgUrl()
     this.findAndEmbedYoutubeUrl()
       
@@ -131,6 +135,7 @@ a {
 
 .thumbnail {
   flex: 0 0 25%;
+  padding-right: 30px;
 }
 
 .thumbnail img {
@@ -145,7 +150,6 @@ a {
 
 .msgbodyinner {
   flex: 1;
-  padding-left: 30px;
   max-width:80%;
 }
 
@@ -211,11 +215,16 @@ a {
 }
 
 .youtubeEmbed {
-  padding-top:15px;
+  padding-top: 15px;
+  margin-left: -42px;
+}
+
+.youtubeEmbed iframe {
+  padding: 0;
   margin: 0;
 }
 
-/* IMAGE STUFF */
+
 
 
 </style>

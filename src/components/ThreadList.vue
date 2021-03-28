@@ -74,7 +74,7 @@ a {
 }
 .threads th {
   text-align: left;
-  max-width: 1000px;
+  max-width: 35vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -82,9 +82,10 @@ a {
 .threadlist {
   background-image: url("../assets/sky.gif");
   background-size:100% 100%;
-  padding: 20px 50px;
-  display:table;
+  padding: 2vw 3vh;
   margin: 30px auto;
+  display:table;
+  max-width: 80vw;
 }
 .oswald {
       font-family: "Oswald", Helvetica, Arial;
