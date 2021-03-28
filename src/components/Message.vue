@@ -129,6 +129,7 @@ a {
 .msgbodyinner {
   flex: 1;
   padding-left: 30px;
+  max-width:80%;
 }
 
 .highlight {
