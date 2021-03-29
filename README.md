@@ -1,2 +1,2 @@
 # TangleBoard
-Vue Frontend for Message board running on the IOTA Ledger
+Message board running on the IOTA Ledger
